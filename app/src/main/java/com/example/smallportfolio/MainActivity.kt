@@ -2,6 +2,7 @@ package com.example.smallportfolio
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -61,19 +63,54 @@ fun CreateSmallPortfolio(){
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 CreateImageProfile()
-                Divider(
-                    thickness = 4.dp,
-                    color = MaterialTheme.colors.primary
-                )
-                Text(
-                    text = "Name Mid. Surname",
-                    color = MaterialTheme.colors.secondaryVariant,
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Divider(thickness = 4.dp, color = MaterialTheme.colors.primary)
+                CreateSmallBio()
+                CreatePortfolioButton()
             }
         }
     }
+}
+@Preview
+@Composable
+fun Content(){
+
+}
+
+@Composable
+private fun CreatePortfolioButton() {
+    Button(
+        onClick = {
+            Log.d("Clicked", "CreateSmallPortfolio: Clicked Button")
+        }) {
+        Text(
+            text = "Portfolio",
+            style = MaterialTheme.typography.button
+        )
+    }
+}
+
+@Composable
+private fun CreateSmallBio() {
+    Column(modifier = Modifier.padding(5.dp)) {
+        Text(
+            text = "Name Surname",
+            color = MaterialTheme.colors.secondaryVariant,
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Left
+        )
+        Text(
+            text = "In sodales neque in convallis iaculis",
+            fontSize = 16.sp,
+            textAlign = TextAlign.Justify
+        )
+        Text(
+            text = "@TwitterHandle",
+            textAlign = TextAlign.Left,
+            color = Color.Cyan
+        )
+    }
+
 }
 
 @Composable
