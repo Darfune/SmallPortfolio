@@ -73,7 +73,24 @@ fun CreateSmallPortfolio(){
 @Preview
 @Composable
 fun Content(){
+    Box(modifier = Modifier
+        .fillMaxHeight()
+        .fillMaxWidth()
+        .padding(5.dp)){
+        Surface(modifier = Modifier
+            .padding(3.dp)
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        shape = RoundedCornerShape(corner = CornerSize(6.dp)),
+        border = BorderStroke(width = 2.dp, color = Color.Magenta)) {
+            Portfolio(data = listOf("Project 1", "Project 2", "Project 3", "Project 4", "Project 5"))
+        }
+    }
+}
 
+@Composable
+fun Portfolio(data: List<String>) {
+    Text(text = "Projects go here!")
 }
 
 @Composable
