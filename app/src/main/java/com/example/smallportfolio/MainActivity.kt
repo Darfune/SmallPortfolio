@@ -52,7 +52,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CreateSmallPortfolio(){
-    val projectsButtonState = remember {
+    val projectsButtonState1 = remember {
+        mutableStateOf(false)
+    }
+    val projectsButtonState2 = remember {
         mutableStateOf(false)
     }
     Surface(
@@ -74,7 +77,9 @@ fun CreateSmallPortfolio(){
                 CreateImageProfile()
                 Divider(thickness = 4.dp, color = MaterialTheme.colors.primary)
                 CreateSmallBio()
-                CreatePortfolioButton(projectsButtonState)
+
+                CreatePortfolioButton(projectsButtonState1)
+                CreatePortfolioButton(projectsButtonState2)
             }
         }
     }
@@ -104,12 +109,22 @@ fun Portfolio(data: List<String>) {
             Card(modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
-            shape = RectangleShape) {
+            shape = RectangleShape,
+            elevation = 4.dp) {
                 Row(modifier = Modifier
                     .padding(8.dp)
                     .background(MaterialTheme.colors.surface)
-                    .padding(16.dp)) {
+                    .padding(8.dp)) {
                     CreateImageProfile(modifier = Modifier.size(100.dp))
+                    Column(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .align(alignment = Alignment.CenterVertically)) {
+                        Text(text = item,
+                            fontWeight = FontWeight.Bold)
+                        Text(text = "Project Description",
+                            style = MaterialTheme.typography.body2)
+                    }
                 }
             }
         }
