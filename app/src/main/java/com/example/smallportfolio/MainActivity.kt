@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -80,11 +81,24 @@ fun CreateSmallPortfolio(){
 
                 CreatePortfolioButton(projectsButtonState1)
                 CreatePortfolioButton(projectsButtonState2)
+
+                Card(
+                    shape = RoundedCornerShape(corner = CornerSize(16.dp)),
+                    elevation = 4.dp) {
+                    Row(
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .fillMaxWidth()) {
+
+                    }
+
+                }
+                Divider(thickness = 4.dp, color = MaterialTheme.colors.primary)
             }
         }
     }
 }
-@Preview
+
 @Composable
 fun Content(){
     Box(modifier = Modifier
