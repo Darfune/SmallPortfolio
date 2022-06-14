@@ -8,18 +8,21 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,6 +49,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CreateSmallPortfolio(){
+    val projectsButtonState = remember {
+        mutableStateOf(false)
+    }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -65,7 +71,7 @@ fun CreateSmallPortfolio(){
                 CreateImageProfile()
                 Divider(thickness = 4.dp, color = MaterialTheme.colors.primary)
                 CreateSmallBio()
-                CreatePortfolioButton()
+                CreatePortfolioButton(projectsButtonState)
             }
         }
     }
@@ -90,19 +96,29 @@ fun Content(){
 
 @Composable
 fun Portfolio(data: List<String>) {
-    Text(text = "Projects go here!")
+    LazyColumn{
+        items(data){ item ->
+            Text(item)
+        }
+    }
 }
 
 @Composable
-private fun CreatePortfolioButton() {
+private fun CreatePortfolioButton(projectsButtonState: MutableState<Boolean>) {
     Button(
         onClick = {
+            projectsButtonState.value = !projectsButtonState.value
             Log.d("Clicked", "CreateSmallPortfolio: Clicked Button")
         }) {
         Text(
-            text = "Portfolio",
+            text = "Projects",
             style = MaterialTheme.typography.button
         )
+    }
+    if (projectsButtonState.value){
+        Content()
+    }else{
+        Box(){}
     }
 }
 
